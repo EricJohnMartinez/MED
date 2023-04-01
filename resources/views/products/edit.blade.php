@@ -94,8 +94,8 @@
 
                 <div class="form-group">
                     <label for="medicinetype" class="form-label">Medicine Type</label>
-                    <select name="medicinetype" class="form-control @error('medicinetype') is-invalid @enderror" id="medicinetype" aria-label="select example">
-                    <option selected disabled>Select</option>
+                    <select name="medicinetype" class="form-control @error('medicinetype') is-invalid @enderror" id="medicinetype" aria-label="select example" >
+                    <option value="{{ old('medicinetype', $product->medicinetype) }}">{{ old('medicinetype', $product->medicinetype) }}</option>
                     <option value="Liquid">Liquid</option>
                     <option value="Tablet">Tablet</option>
                     <option value="Capsules">Capsules</option>

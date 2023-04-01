@@ -55,12 +55,11 @@
                             <td>{{ $product->medicinetype }}</td>
                             <td>
                                 @if ($product->quantity <= 0)
-                    <span class="right badge badge-danger">Inactive</span>
-                @else
-                    <span class="right badge badge-success">Active</span>
-                @endif
+                                <span class="right badge badge-{{ $product->status ? 'danger' : 'danger' }}"> {{ $product->status ? 'Inactive' : 'Inactive' }} </span>
+                                @else
+                                <span class="right badge badge-{{ $product->status ? 'success' : 'danger' }}"> {{ $product->status ? 'Active' : 'Inactive' }} </span>          
+                                @endif
                             </td>
-
                             <td>{{ $product->created_at }}</td>
                             <td>{{ $product->updated_at }}</td>
                             @if (Auth::user()->roles == 'pharmacy')

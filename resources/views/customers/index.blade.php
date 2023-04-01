@@ -47,21 +47,17 @@
                             <td><a href="{{ route('customers.editmedication', $customer) }}">{{ $customer->first_name }} {{ $customer->last_name }}</a></td>
                             <td>{{ $customer->room_number }}</td>
                             <td>{{ $customer->created_at }}</td>
-                            @if (Auth::user()->roles == 'doctor')
-                            <td>
-                            
-                            <button class="btn btn-danger btn-delete"
-                            data-url="{{ route('customers.destroy', $customer) }}"><i
-                                class="fas fa-trash"></i></button>
-                             @endif
                             </td>
                             @if (Auth::user()->roles != 'doctor')
                             <td>
                                 <a href="{{ route('customers.edit', $customer) }}" class="btn btn-primary"><i
                                     class="fas fa-edit"></i></a>
+                                    
+                                    @if (Auth::user()->roles == 'admin')
                                 <button class="btn btn-danger btn-delete"
                                     data-url="{{ route('customers.destroy', $customer) }}"><i
                                         class="fas fa-trash"></i></button>
+                                        @endif
                             </td>
                             @endif
                         </tr>

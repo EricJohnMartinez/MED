@@ -64,40 +64,6 @@ class OrderController extends Controller
     ]));
 }
 
-    // public function index(Request $request)
-    // {
-       
-
-    //     $orders = new Order();
-    //     if ($request->start_date) {
-    //         $orders = $orders->where('created_at', '>=', $request->start_date);
-    //     }
-    //     if ($request->end_date) {
-    //         $orders = $orders->where('created_at', '<=', $request->end_date . ' 23:59:59');
-    //     }
-    //     $station = $request->query('station') ?? 1;
-
-      
-    //     $orders = $orders->where('station_id', '=', $station)
-    //         ->with(['items', 'payments', 'customer'])
-    //         ->latest()
-    //         ->paginate(10);
-
-    //     $total = $orders->map(function ($i) {
-    //         return $i->total();
-    //     })->sum();
-    //     $receivedAmount = $orders->map(function ($i) {
-    //         return $i->receivedAmount();
-    //     })->sum();
-
-    //     return view('orders.index', compact([
-    //         'orders',
-    //         'total',
-    //         'receivedAmount',
-    //         'station',
-    //     ]));
-    // }
-
     public function store(OrderStoreRequest $request)
     {
         $user = Customer::where('id', $request->customer_id)->first();
@@ -158,4 +124,27 @@ class OrderController extends Controller
         $pdf = Pdf::loadView('pdf.invoice', compact('order'));
         return $pdf->stream();
     }
+
+    public function destroy(Order $order)
+{
+    // delete the order
+    $order->delete();
+
+    // redirect to the index page with a success message
+    return redirect()->route('orders.index')->with('success', 'Order has been deleted.');
+}
+
+
+public function update(Order $order)
+{
+    // Update the order's status or other attributes here...
+
+    // Update only the updated_at timestamp
+    $order->touch();
+
+    // Redirect back to the index view of orders
+    return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
+}
+
+
 }

@@ -35,6 +35,7 @@
 </head>
 
 <body>
+    
     <div>
         <p><strong>Receipt Details:</strong></p>
         <p>Name: {{ $order->name }}</p>
@@ -44,40 +45,49 @@
                 N/A
             @endempty</p>
         <p>Doctor: @if ($order->doctor)
-                Dr. {{ $order->doctor }}
+                {{ $order->doctor }}
             @else
                 N/A
             @endempty
         </p>
-    <p>Nurse: @if ($order->nurse)
+        <p>Nurse: @if ($order->nurse)
                 {{ $order->nurse }}
             @else
                 N/A
             @endempty</p>
-    <p>Date and Time: {{ Carbon\Carbon::parse($order->created_at)->format('h:m a M d, Y ') }}</p>
-</div>
-<table>
-    <thead>
-        <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th class="text-right">Price</th>
-            <th class="text-right">Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($order->items as $item)
+        <p>Date and Time: {{ Carbon\Carbon::parse($order->created_at)->format('h:m a M d, Y ') }}</p>
+    </div>
+    <table>
+        <thead>
             <tr>
-                <td>{{ $item->product_name }}</td>
-                <td>{{ $item->quantity }}</td>
-                <!-- <td class="text-right">{{ $item->price }}</td> -->
-                <td class="text-right">{{ number_format($item->price, 2) }}</td>
-                <td class="text-right">Php {{ number_format($item->quantity * $item->price, 2) }} </td>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Total</th>
             </tr>
-        @endforeach
-
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @php
+                $grand_total = 0; // initialize the grand total to zero
+            @endphp
+            @foreach ($order->items as $item)
+                @php
+                    $item_total = $item->quantity * $item->price; // calculate the total price for the item
+                    $grand_total += $item_total; // add the item total to the grand total
+                @endphp
+                <tr>
+                    <td>{{ $item->product_name }}</td>
+                    <td>{{ $item->quantity }}</td>
+                    <td class="text-right">{{ number_format($item->price, 2) }}</td>
+                    <td class="text-right">Php {{ number_format($item_total, 2) }} </td>
+                </tr>
+            @endforeach
+            <tr>
+                <td colspan="3" class="text-right total">Grand Total:</td>
+                <td class="text-right total">Php {{ number_format($grand_total, 2) }}</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 
 </html>

@@ -111,28 +111,19 @@
                            
                             <td>{{ $order->created_at }}</td>
                             <td>{{ $order->updated_at }}</td>
+                        
                             @if (auth()->user()->roles == 'admin')
                             
                             <td>
-                                <form method="POST" action="{{ route('orders.update', $order->id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </form>
+                               
+                                <a href="{{ route('orders.edit', $order) }}" class="btn btn-primary"><i
+                                    class="fas fa-edit"></i></a>
 
                                 <button class="btn btn-danger btn-delete"
                                 data-url="{{ route('orders.destroy', $order) }}"><i
                                     class="fas fa-trash"></i></button></td>
                             @endif
-                            @if (auth()->user()->roles == 'pharmacy')
-                            <td>
-                                <form method="POST" action="{{ route('orders.update', $order->id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </form>
-                            </td>
-                            @endif
+                            
                         </tr>
                     @endforeach
                 </tbody>

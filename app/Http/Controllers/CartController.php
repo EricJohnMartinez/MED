@@ -25,6 +25,14 @@ class CartController extends Controller
         $barcode = $request->barcode;
 
         $product = Product::where('barcode', $barcode)->first();
+
+          // Check if product is active before allowing the user to add it to the cart
+          if ($product->status == 0) {
+            return response([
+                'message' => 'Product is currently inactive and cannot be ordered',
+            ], 400);
+        }
+
         $cart = $request->user()->cart()->where('barcode', $barcode)->first();
         if ($cart) {
             // check product quantity
