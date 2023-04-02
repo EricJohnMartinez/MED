@@ -18,6 +18,20 @@
 @endsection
 @section('content')
 
+<div class="container-fluid m-0 p-0">
+    <form action="{{ route('customers.index') }}" method="GET">
+        <div class="dropdown text-center">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="customer-status-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Patient Status
+            </button>
+            <div class="dropdown-menu" aria-labelledby="customer-status-dropdown">
+                <a class="dropdown-item" href="{{ route('customers.index', ['status' => 'active']) }}">Active</a>
+                <a class="dropdown-item" href="{{ route('customers.index', ['status' => '1']) }}">Inactive</a>
+            </div>
+        </div>
+    </form>
+</div>
+
     <div class="container-fluid m-0 p-0">
         <form action="{{ route('customers.index') }}" method="GET">
             <div class="d-flex w-100">
@@ -37,6 +51,7 @@
                         <th>Name</th>
                         <th>Room Number</th>
                         <th>Date</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -47,6 +62,7 @@
                             <td><a href="{{ route('customers.editmedication', $customer) }}">{{ $customer->first_name }} {{ $customer->last_name }}</a></td>
                             <td>{{ $customer->room_number }}</td>
                             <td>{{ $customer->created_at }}</td>
+                            <td> <span class="right badge badge-{{ $customer->is_discharged ?   'danger' : 'success'}}"> {{ $customer->is_discharged ?  'Inactive' : 'Active' }} </span> </td>
                             </td>
                             @if (Auth::user()->roles != 'doctor')
                             <td>

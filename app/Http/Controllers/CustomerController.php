@@ -18,26 +18,33 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-
         if (request()->wantsJson()) {
             return response(
                 Customer::all()
             );
         }
+    
         $customers = Customer::where(function ($query) use ($request) {
             $query->when(!empty($request->query('query')), function ($query) use ($request) {
                 $queryString = $request->query('query');
-
+    
                 $query->where('first_name', 'like', '%' . $queryString . '%')
                     ->orWhere('id', 'like', '%' . $queryString . '%')
                     ->orWhere('last_name', 'like', '%' . $queryString . '%')
                     ->orWhere('room_number', 'like', '%' . $queryString . '%')
                     ->orWhere('created_at', 'like', '%' . $queryString . '%');
             });
+    
+            $query->when(!empty($request->query('status')), function ($query) use ($request) {
+                $query->where('is_discharged', $request->query('status'));
+            });
+            
         })->latest()->paginate(10);
+    
         return view('customers.index')->with([
             'customers' => $customers,
             'query' => $request->query('query') ?? null,
+            'selectedStatus' => $request->query('status') ?? null,
         ]);
     }
 

@@ -199,8 +199,22 @@
                         </span>
                     @enderror
                 </div>
-                
-                
+
+                <div class="form-group">
+                    <label for="is_discharged">Status</label>
+                    <select name="is_discharged" class="form-control @error('is_discharged') is-invalid @enderror" id="is_discharged">
+                        <option value="0" {{ old('is_discharged', $customer->is_discharged) === 0 ? 'selected' : '' }}>Active
+                        </option>
+                        <option value="1" {{ old('is_discharged', $customer->is_discharged) === 1 ? 'selected' : '' }}>Inactive
+                        </option>
+                    </select>
+                    @error('is_discharged')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
         <button class="btn btn-success btn-block btn-lg" type="submit">Save Changes</button>
     </form>
 @endsection
