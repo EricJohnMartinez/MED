@@ -55,7 +55,8 @@
             @else
                 N/A
             @endempty</p>
-        <p>Date and Time: {{ Carbon\Carbon::parse($order->created_at)->format('h:m a M d, Y ') }}</p>
+            <p>Date and Time: {{ Carbon\Carbon::parse($order->updated_at)->format('h:i A M:d:Y') }}</p>
+
     </div>
     <table>
         <thead>
