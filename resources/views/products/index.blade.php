@@ -55,9 +55,9 @@
                             <td>{{ $product->medicinetype }}</td>
                             <td>
                                 @if ($product->quantity <= 0)
-                                <span class="right badge badge-{{ $product->status ? 'danger' : 'danger' }}"> {{ $product->status ? 'Inactive' : 'Inactive' }} </span>
+                                <span class="right badge badge-{{ $product->status ? 'danger' : 'danger' }}"> {{ $product->status ? 'Out of Order' : 'Out of Order' }} </span>
                                 @else
-                                <span class="right badge badge-{{ $product->status ? 'success' : 'danger' }}"> {{ $product->status ? 'Active' : 'Inactive' }} </span>          
+                                <span class="right badge badge-{{ $product->status ? 'success' : 'danger' }}"> {{ $product->status ? 'Active' : 'Out of Order' }} </span>          
                                 @endif
                             </td>
                             <td>{{ $product->created_at }}</td>

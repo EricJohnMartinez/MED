@@ -205,7 +205,7 @@
                     <select name="is_discharged" class="form-control @error('is_discharged') is-invalid @enderror" id="is_discharged">
                         <option value="0" {{ old('is_discharged', $customer->is_discharged) === 0 ? 'selected' : '' }}>Active
                         </option>
-                        <option value="1" {{ old('is_discharged', $customer->is_discharged) === 1 ? 'selected' : '' }}>Inactive
+                        <option value="1" {{ old('is_discharged', $customer->is_discharged) === 1 ? 'selected' : '' }}>Discharged
                         </option>
                     </select>
                     @error('is_discharged')

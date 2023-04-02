@@ -26,7 +26,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="customer-status-dropdown">
                 <a class="dropdown-item" href="{{ route('customers.index', ['status' => 'active']) }}">Active</a>
-                <a class="dropdown-item" href="{{ route('customers.index', ['status' => '1']) }}">Inactive</a>
+                <a class="dropdown-item" href="{{ route('customers.index', ['status' => '1']) }}">Discharged</a>
             </div>
         </div>
     </form>
@@ -62,7 +62,7 @@
                             <td><a href="{{ route('customers.editmedication', $customer) }}">{{ $customer->first_name }} {{ $customer->last_name }}</a></td>
                             <td>{{ $customer->room_number }}</td>
                             <td>{{ $customer->created_at }}</td>
-                            <td> <span class="right badge badge-{{ $customer->is_discharged ?   'danger' : 'success'}}"> {{ $customer->is_discharged ?  'Inactive' : 'Active' }} </span> </td>
+                            <td> <span class="right badge badge-{{ $customer->is_discharged ?   'danger' : 'success'}}"> {{ $customer->is_discharged ?  'Discharged' : 'Active' }} </span> </td>
                             </td>
                             @if (Auth::user()->roles != 'doctor')
                             <td>

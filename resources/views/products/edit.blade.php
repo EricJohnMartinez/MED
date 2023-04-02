@@ -116,7 +116,7 @@
                     <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
                         <option value="1" {{ old('status', $product->status) === 1 ? 'selected' : '' }}>Active
                         </option>
-                        <option value="0" {{ old('status', $product->status) === 0 ? 'selected' : '' }}>Inactive
+                        <option value="0" {{ old('status', $product->status) === 0 ? 'selected' : '' }}>Out of Order
                         </option>
                     </select>
                     @error('status')

@@ -92,6 +92,9 @@
                         @if (auth()->user()->roles == 'admin')
                         <th>Action</th>
                         @endif
+                        @if (auth()->user()->roles == 'pharmacy')
+                        <th>Action</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -112,28 +115,49 @@
                             <td>{{ $order->created_at }}</td>
                             <td>{{ $order->updated_at }}</td>
                             @if (auth()->user()->roles == 'admin')
-                            
-                            <td>
-                                <form method="POST" action="{{ route('orders.update', $order->id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </form>
+                                    <td>
+                                        <form method="POST" action="{{ route('orders.update', $order->id) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            @if ($order->status != 'complete')
+                                                <button id="order-complete-btn-{{ $order->id }}" type="submit" class="btn btn-primary" onclick="removeButton({{ $order->id }})">Order Complete Update</button>
+                                            @endif
+                                        </form>
+                                        <button class="btn btn-danger btn-delete" data-url="{{ route('orders.destroy', $order) }}"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                @endif
+                                @if (auth()->user()->roles == 'pharmacy')
+                                    <td>
+                                        <form method="POST" action="{{ route('orders.update', $order->id) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            @if ($order->status != 'complete')
+                                                <button id="order-complete-btn-{{ $order->id }}" type="submit" class="btn btn-primary" onclick="removeButton({{ $order->id }})">Order Complete</button>
+                                            @endif
+                                        </form>
+                                    </td>
+                                @endif
+                                
+                                <script>
+                                    function removeButton(orderId) {
+                                        var btn = document.querySelector('#order-complete-btn-' + orderId);
+                                        var form = btn.closest('form');
+                                        form.submit();
+                                        btn.parentNode.removeChild(btn);
+                                        localStorage.setItem('orderCompleteBtnRemoved-' + orderId, 'true');
+                                    }
 
-                                <button class="btn btn-danger btn-delete"
-                                data-url="{{ route('orders.destroy', $order) }}"><i
-                                    class="fas fa-trash"></i></button></td>
-                            @endif
-                            @if (auth()->user()->roles == 'pharmacy')
-                            <td>
-                                <form method="POST" action="{{ route('orders.update', $order->id) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </form>
-                            </td>
-                            @endif
-                        </tr>
+                                    window.onload = function() {
+                                        var buttons = document.querySelectorAll('[id^="order-complete-btn-"]');
+                                        buttons.forEach(function(btn) {
+                                            var orderId = btn.id.split('-')[3];
+                                            var isBtnRemoved = localStorage.getItem('orderCompleteBtnRemoved-' + orderId);
+                                            if (isBtnRemoved === 'true') {
+                                                btn.parentNode.removeChild(btn);
+                                            }
+                                        });
+                                    };
+                                </script>
                     @endforeach
                 </tbody>
         
@@ -175,6 +199,8 @@
 
 
         }
+        
+
         <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
