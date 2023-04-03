@@ -15,7 +15,11 @@
     @yield('css')
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background: url(images/BG.jpg) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;">
     <div class="login-box">
         <div class="login-logo">
             <a>{{ config('app.name') }}</a>
