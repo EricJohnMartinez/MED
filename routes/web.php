@@ -1,23 +1,25 @@
 <?php
-
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\DoctorOrderSheetController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MedicationController;
-use App\Http\Controllers\MessageController;
-use App\Http\Controllers\NonRestrictedController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RestrictedController;
-use App\Http\Controllers\SettingController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MedicationController;
+use App\Http\Controllers\RestrictedController;
+use App\Http\Controllers\NonRestrictedController;
+use App\Http\Controllers\DoctorOrderSheetController;
 
 Route::get('/', function () {
     return redirect('/admin');
 });
-
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 Route::get('order-count', [OrderController::class, 'getOrderCount'])->name('orders.getCount');
 
 

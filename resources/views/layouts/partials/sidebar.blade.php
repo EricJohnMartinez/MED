@@ -81,16 +81,16 @@
                         <p>Order History</p>
                     </a>
                 </li>
-                {{-- <li class="nav-item has-treeview">
-                    <a href="{{ route('medical-history.index') }}" class="nav-link {{ activeSegment('medical') }}">
-                        <i class="nav-icon fas fa-chart-line"></i>
-                        <p>Medical History </p>
-                    </a>
-                </li> --}}
                 <li class="nav-item has-treeview">
                     <a href="{{ route('messages.index') }}" class="nav-link {{ activeSegment('messages') }}">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>Message</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('register') }}" class="nav-link {{ activeSegment('register') }}">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>Create Account </p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
