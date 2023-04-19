@@ -20,18 +20,24 @@
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;">
-    <div class="login-box">
-        <div class="login-logo">
-            <a>{{ config('app.name') }}</a>
-        </div>
-        <!-- /.login-logo -->
-        <div class="card">
-            <div class="card-body login-card-body">
-                @yield('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-8">
+            <div class="login-box" style="margin-bot: 300px;">
+                <div class="login-logo">
+                    <a class="text-white">{{ config('app.name') }}</a>
+                </div>
+                <div class="card">
+                    <div class="card-body login-card-body">
+                        @yield('content')
+                    </div>
+                </div>
             </div>
-            <!-- /.login-card-body -->
         </div>
     </div>
+</div>
+
+
     <!-- /.login-box -->
 
     <!-- jQuery -->

@@ -8,8 +8,8 @@
     }
 </style>
 @endsection
-
 @section('content')
+
 <p class="login-box-msg">LOG IN</p>
 <!-- -->
 <form action="{{ route('login') }}" method="post">
