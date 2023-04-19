@@ -22,8 +22,8 @@
 background-size: cover;">
 <div class="container">
     <div class="row">
-        <div class="col-md-6 offset-md-8">
-            <div class="login-box" style="margin-bot: 300px;">
+        <div style="margin-left: 800px; ">
+            <div class="login-box" style="margin-bot: 60px;">
                 <div class="login-logo">
                     <a class="text-white">{{ config('app.name') }}</a>
                 </div>
