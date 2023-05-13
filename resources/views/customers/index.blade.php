@@ -10,7 +10,6 @@
         <a href="{{ route('customers.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Add New Patient</a>
     @endif
     @if (Auth::user()->roles == 'doctor')
-        <a href="{{ route('customers.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Add New Patient</a>
     @endif
 @endsection
 @section('css')

@@ -156,13 +156,6 @@
                     </a>
                     
                 </li>
-
-                <li class="nav-item has-treeview">
-                    <a href="{{ route('cart.index') }}" class="nav-link {{ activeSegment('cart') }}">
-                        <i class="nav-icon fas fa-cash-register"></i>
-                        <p>Place Order</p>
-                    </a>
-                </li>
                  <li class="nav-item has-treeview">
                     <a href="{{ route('orders.index') }}" class="nav-link {{ activeSegment('orders') }}">
                         <i class="nav-icon fas fa-chart-line"></i>
